@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignIn snapshot should render correctly 1`] = `
+Array [
+  <div
+    class="pageHeader"
+  >
+    Welcome to Sign In Page
+  </div>,
+  <br />,
+  <div />,
+]
+`;
