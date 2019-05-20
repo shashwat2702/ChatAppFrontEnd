@@ -35,13 +35,78 @@ Array [
       />
     </div>
   </nav>,
-  <div
-    className="hyperLink"
-  />,
-  <div
+  <div>
+    <div
+      className="loginForm"
+    >
+      <ul
+        class="tab-group"
+      >
+        <li
+          class="tab"
+        />
+        <li
+          class="tab active"
+        />
+      </ul>
+      <div
+        class="tab-content"
+      >
+        <h1>
+          Welcome Back
+        </h1>
+        <form>
+          <div
+            class="field-wrap"
+          >
+            <label>
+              Email ID 
+              <span
+                class="req"
+              >
+                *
+              </span>
+            </label>
+            <input
+              autocomplete="off"
+              required={true}
+              type="text"
+            />
+          </div>
+          <div
+            class="field-wrap"
+          >
+            <label>
+              Password 
+              <span
+                class="req"
+              >
+                *
+              </span>
+            </label>
+            <input
+              autocomplete="off"
+              required={true}
+              type="text"
+            />
+          </div>
+          <button
+            class="button button-block"
+            type="submit"
+          >
+            Log In
+          </button>
+        </form>
+        <div
+          id="login"
+        />
+      </div>
+    </div>
+  </div>,
+  <footer
     className="pageFooter"
   >
     This is the footer section
-  </div>,
+  </footer>,
 ]
 `;
