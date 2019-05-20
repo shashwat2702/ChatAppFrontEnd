@@ -1,12 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HomePage snapshot should render correctly 1`] = `
-Array [
-  <div
-    class="pageHeader"
-  >
-    Welcome to Home Page
-  </div>,
-  <div />,
-]
+<div
+  class="pageHeader"
+>
+  Welcome to Home Page
+</div>
 `;

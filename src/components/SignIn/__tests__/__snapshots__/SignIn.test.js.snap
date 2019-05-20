@@ -5,9 +5,8 @@ Array [
   <div
     class="pageHeader"
   >
-    Welcome to Sign In Page
+    Welcome to Home Page
   </div>,
-  <br />,
   <div />,
 ]
 `;
