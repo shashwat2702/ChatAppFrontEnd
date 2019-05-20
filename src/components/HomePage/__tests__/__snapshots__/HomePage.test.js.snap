@@ -59,43 +59,61 @@ Array [
           <div
             class="field-wrap"
           >
-            <label>
-              Email ID 
-              <span
-                class="req"
+            <div
+              className="inputComponent"
+            >
+              <label
+                htmlFor="LoginEmail"
               >
-                *
-              </span>
-            </label>
-            <input
-              autocomplete="off"
-              required={true}
-              type="text"
-            />
+                Email ID
+                <span
+                  className="req"
+                >
+                  *
+                </span>
+              </label>
+              <input
+                autoComplete="off"
+                id="LoginEmail"
+                placeholder="example@mail.com"
+                type="email"
+              />
+            </div>
           </div>
           <div
             class="field-wrap"
           >
-            <label>
-              Password 
-              <span
-                class="req"
+            <div
+              className="inputComponent"
+            >
+              <label
+                htmlFor="LoginPassword"
               >
-                *
-              </span>
-            </label>
-            <input
-              autocomplete="off"
-              required={true}
-              type="text"
-            />
+                Password
+                <span
+                  className="req"
+                >
+                  *
+                </span>
+              </label>
+              <input
+                autoComplete="off"
+                id="LoginPassword"
+                placeholder="Password"
+                type="password"
+              />
+            </div>
           </div>
-          <button
-            class="button button-block"
-            type="submit"
+          <div
+            className="buttonComponent"
           >
-            Log In
-          </button>
+            <button
+              className="button button-block"
+              type="submit"
+            >
+              Log In
+            </button>
+          </div>
         </form>
         <div
           id="login"

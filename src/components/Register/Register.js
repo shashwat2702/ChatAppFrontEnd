@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../shared/Input/Input';
+import Button from '../shared/Button/Button';
 import './Register.scss';
 
 export default class Register extends Component {
@@ -7,10 +9,10 @@ export default class Register extends Component {
     return (
         <div className="registrationForm">
       
-        <ul class="tab-group">
-          <li class="tab active"><Link to="/registration">Sign Up</Link></li>
-          <li class="tab"><Link to="/login">Log In</Link></li>
-        </ul>
+          <ul class="tab-group">
+            <li class="tab active"><Link to="/registration">Sign Up</Link></li>
+            <li class="tab"><Link to="/login">Log In</Link></li>
+          </ul>
       
         <div class="tab-content">
           <div id="signup">   
@@ -19,62 +21,59 @@ export default class Register extends Component {
             <form action="/" method="post">
           
                 <div class="field-wrap">
-                  <label>
-                    Username<span class="req">*</span>
-                  </label>
-                  <input type="text" required autocomplete="off" />
+                <Input
+                    id={ 'RegistrationUserName'}
+                    label={'Username'}
+                    className={'req'}
+                    spanContent={'*'}
+                    type={'text'}
+                    placeholder={'Barack@president'}
+                    autoComplete={'off'}
+                />
                 </div>
         
                 <div class="field-wrap">
-                  <label>
-                    Name<span class="req">*</span>
-                  </label>
-                  <input type="text"required autocomplete="off"/>
+                  <Input
+                    id={ 'RegistrationName'}
+                    label={'Name'}
+                    className={'req'}
+                    spanContent={'*'}
+                    type={'text'}
+                    placeholder={'Barack Obama'}
+                    autoComplete={'off'}
+                />
                 </div>
                 <div class="field-wrap">
-                  <label>
-                    Email ID<span class="req">*</span>
-                  </label>
-                  <input type="text"required autocomplete="off"/>
+                  <Input
+                    id={ 'RegistrationEmail'}
+                    label={'Email ID'}
+                    className={'req'}
+                    spanContent={'*'}
+                    type={'email'}
+                    placeholder={'example@mail.com'}
+                    autoComplete={'off'}
+                />
                 </div>
                 <div class="field-wrap">
-                  <label>
-                    Password<span class="req">*</span>
-                  </label>
-                  <input type="text"required autocomplete="off"/>
+                 <Input
+                  id={ 'RegistrationPassword'}
+                  label={'Password'}
+                  className={'req'}
+                  spanContent={'*'}
+                  type={'password'}
+                  placeholder={'Password'}
+                  autoComplete={'off'}
+                />
                 </div>    
-              <button type="submit" class="button button-block">Get Started</button>
+              <Button type="submit" label={'Get Started'}/>
           
             </form>
 
           </div>
         
           <div id="login">   
-            <h1>Welcome Back!</h1>
-          
-            <form action="/" method="post">
-          
-              <div class="field-wrap">
-                <label>
-                  Email Address<span class="req">*</span>
-                </label>
-                <input type="email"required autocomplete="off"/>
-              </div>
-          
-              <div class="field-wrap">
-                <label>
-                  Password<span class="req">*</span>
-                </label>
-                <input type="password"required autocomplete="off"/>
-              </div>
-              <button class="button button-block">Log In</button>
-          
-            </form>
-
           </div>
-        
         </div>
-      
       </div>
     )
   }

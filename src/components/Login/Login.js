@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../shared/Input/Input';
+import Button from '../shared/Button/Button';
 import './Login.scss';
 
 export default class Login extends Component {
@@ -15,18 +17,28 @@ export default class Login extends Component {
             <h1>Welcome Back</h1>
             <form>
               <div class="field-wrap">
-                <label>
-                  Email ID <span class="req">*</span>
-                </label>
-                <input type="text" required autocomplete="off" />
+                <Input
+                  id={ 'LoginEmail'}
+                  label={'Email ID'}
+                  className={'req'}
+                  spanContent={'*'}
+                  type={'email'}
+                  placeholder={'example@mail.com'}
+                  autoComplete={'off'}
+                />
               </div>
               <div class="field-wrap">
-                <label>
-                  Password <span class="req">*</span>
-                </label>
-                <input type="text"required autocomplete="off"/>
+              <Input
+                  id={ 'LoginPassword'}
+                  label={'Password'}
+                  className={'req'}
+                  spanContent={'*'}
+                  type={'password'}
+                  placeholder={'Password'}
+                  autoComplete={'off'}
+                />
               </div>   
-              <button type="submit" class="button button-block">Log In</button>
+              <Button type="submit" label={'Log In'}/>
             </form>
             <div id="login">   
             </div>

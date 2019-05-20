@@ -1,0 +1,21 @@
+$bold: 600;
+$main: #1ab188;
+$white: #ffffff;
+.buttonComponent {
+    .button {
+        border:0;
+        outline:none;
+        padding:15px 0;
+        font-size:2rem;
+        font-weight:$bold;
+        text-transform:uppercase;
+        letter-spacing:.1em;
+        background:$main;
+        color:$white;
+      }
+      
+      .button-block {
+        display:block;
+        width:100%;
+      }
+}
