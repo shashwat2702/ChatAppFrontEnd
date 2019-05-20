@@ -3,7 +3,7 @@ import './Footer.css';
 
 export default function Footer() {
   return (
-    <div class="pageFooter">
+    <div className="pageFooter">
         This is the footer section
     </div>
   )

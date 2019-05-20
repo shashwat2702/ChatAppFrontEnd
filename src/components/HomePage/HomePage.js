@@ -9,7 +9,7 @@ export default class HomePage extends Component {
     return (
       <Fragment>
       <Header/>
-      <div>
+      <div className="hyperLink">
         <Link to="/signin">
           Click here to go Sign In Page
         </Link>

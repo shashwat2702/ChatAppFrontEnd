@@ -2,11 +2,44 @@
 
 exports[`SignIn snapshot should render correctly 1`] = `
 Array [
-  <div
-    class="pageHeader"
+  <nav
+    className="pageHeader"
   >
-    Welcome to Home Page
-  </div>,
+    <div
+      className="navLinks"
+    >
+      <a
+        className="active"
+        href="#home"
+      >
+        Home
+      </a>
+      <a
+        href="#news"
+      >
+        News
+      </a>
+      <a
+        href="#contact"
+      >
+        Contact
+      </a>
+      <a
+        href="#about"
+      >
+        About
+      </a>
+      <img
+        alt="hamburger menu"
+        src="iconfinder_menu-alt_134216.svg"
+      />
+    </div>
+  </nav>,
   <div />,
+  <div
+    className="pageFooter"
+  >
+    This is the footer section
+  </div>,
 ]
 `;
