@@ -17,6 +17,8 @@ export default function Input(props) {
             placeholder={props.placeholder}
             value={props.value}
             id={props.id}
+            name={props.name}
+            onFocus={props.onFocus}
             autoComplete={props.autoComplete}
         />
     </div>

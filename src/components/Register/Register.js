@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Input from '../shared/Input/Input';
 import Button from '../shared/Button/Button';
+import { postData } from '../../utils/getData';
 import './Register.scss';
 
-export default class Register extends Component {
+class Register extends Component {
+  onSubmit = () => {
+    const {history} = this.props;
+    postData('http://localhost:8080/login', {email:'shashwat@gmail.com',password:'Pass@1'})
+    .then(({data, status})=> {
+      console.log(data,status);
+      if(data==='Authenticated') {
+        history.push('/home');
+      }
+    });
+  }
   render() {
     return (
         <div className="registrationForm">
       
-          <ul class="tab-group">
-            <li class="tab active"><Link to="/registration">Sign Up</Link></li>
-            <li class="tab"><Link to="/">Log In</Link></li>
+          <ul className="tab-group">
+            <li className="tab active"><Link to="/registration">Sign Up</Link></li>
+            <li className="tab"><Link to="/">Log In</Link></li>
           </ul>
       
-        <div class="tab-content">
+        <div className="tab-content">
           <div id="signup">   
             <h1>Sign Up for Free</h1>
           
-            <form action="/" method="post">
+            <form
+              onSubmit={ (e) => { e.preventDefault(); } }
+            >
           
-                <div class="field-wrap">
+                <div className="field-wrap">
                 <Input
                     id={ 'RegistrationUserName'}
                     label={'Username'}
@@ -32,7 +45,7 @@ export default class Register extends Component {
                 />
                 </div>
         
-                <div class="field-wrap">
+                <div className="field-wrap">
                   <Input
                     id={ 'RegistrationName'}
                     label={'Name'}
@@ -43,7 +56,7 @@ export default class Register extends Component {
                     autoComplete={'off'}
                 />
                 </div>
-                <div class="field-wrap">
+                <div className="field-wrap">
                   <Input
                     id={ 'RegistrationEmail'}
                     label={'Email ID'}
@@ -54,7 +67,7 @@ export default class Register extends Component {
                     autoComplete={'off'}
                 />
                 </div>
-                <div class="field-wrap">
+                <div className="field-wrap">
                  <Input
                   id={ 'RegistrationPassword'}
                   label={'Password'}
@@ -65,7 +78,7 @@ export default class Register extends Component {
                   autoComplete={'off'}
                 />
                 </div>    
-              <Button type="submit" label={'Get Started'}/>
+              <Button type="submit" label={'Get Started'} onClick={this.onSubmit}/>
           
             </form>
 
@@ -78,3 +91,4 @@ export default class Register extends Component {
     )
   }
 }
+export default withRouter(Register);
