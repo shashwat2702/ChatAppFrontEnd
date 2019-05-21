@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import hamburger from '../../../assets/iconfinder_menu-alt_134216.svg';
 
@@ -13,10 +14,10 @@ export default class Header extends Component {
     return (
       <nav className="pageHeader">
       <div className="navLinks">
-        <a href="#home" className="active">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+        <Link to="/" className="active">Home</Link>
+        <Link to="/" >News</Link>
+        <Link to="/" >Contact</Link>
+        <Link to="/" >About</Link>
         <img src={hamburger} alt="hamburger menu"/>
       </div>
     </nav>

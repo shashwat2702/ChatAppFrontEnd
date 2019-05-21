@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`HomePage snapshot should render correctly 1`] = `
-<footer
-  className="pageFooter"
->
-  This is the footer section
-</footer>
-`;

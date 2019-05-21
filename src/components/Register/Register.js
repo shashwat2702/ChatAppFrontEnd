@@ -2,21 +2,74 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Input from '../shared/Input/Input';
 import Button from '../shared/Button/Button';
-import { postData } from '../../utils/getData';
+import { getData, postData } from '../../utils/getData';
 import './Register.scss';
 
 class Register extends Component {
+  state = {
+      userName: '',
+      name: '',
+      email: '',
+      password: '',
+      usernameTaken: false,
+      usernameAvailable: false,
+      emailTaken: false,
+      emailAvailable: false
+    };
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
+  };
   onSubmit = () => {
     const {history} = this.props;
-    postData('http://localhost:8080/login', {email:'shashwat@gmail.com',password:'Pass@1'})
-    .then(({data, status})=> {
-      console.log(data,status);
-      if(data==='Authenticated') {
+    const { userName, name, email, password } = this.state;
+    if(userName!==''&&name!==''&&email!==''&&password!==''){
+      postData('http://localhost:8080/register', { userName, name, email, password })
+        .then(({data, status})=> {
+      if(data===userName) {
         history.push('/home');
       }
     });
+    }
+  };
+  isUsernameAvailable = () => {
+    const { userName } = this.state;
+    if(userName!==''){
+      getData('http://localhost:8080/checkUserName?userName='+userName).then(({data})=> {
+      if(data==='UserName Already Exists'){
+        this.setState({usernameTaken: true, usernameAvailable: false});
+      } else {
+        this.setState({usernameTaken: false, usernameAvailable: true});
+      }
+    });
+    }
+  }
+  isEmailAvailable = () => {
+    const { email } = this.state;
+    if(email!==''){
+      getData('http://localhost:8080/checkEmail?email='+email).then(({data})=> {
+      if(data==='Email Already Exists'){
+        this.setState({emailTaken: true, emailAvailable: false});
+      } else {
+        this.setState({emailTaken: false, emailAvailable: true});
+      }
+    });
+    }
   }
   render() {
+    const { userName,
+     name,
+     email,
+     password,
+     usernameTaken,
+     usernameAvailable,
+     emailTaken,
+     emailAvailable } = this.state;
     return (
         <div className="registrationForm">
       
@@ -40,10 +93,25 @@ class Register extends Component {
                     className={'req'}
                     spanContent={'*'}
                     type={'text'}
+                    name={'userName'}
                     placeholder={'Barack@president'}
+                    onChange={this.handleInputChange}
+                    onFocus={this.onFocus}
+                    onBlur={this.isUsernameAvailable}
+                    value={userName}
                     autoComplete={'off'}
                 />
                 </div>
+                {usernameTaken &&
+                  <div className="field-wrap">
+                    <p className="errorBox">User Name is Already Taken</p>
+                  </div> 
+                }
+                {usernameAvailable &&
+                  <div className="field-wrap">
+                    <p className="successBox">User Name is Available</p>
+                  </div> 
+                } 
         
                 <div className="field-wrap">
                   <Input
@@ -52,7 +120,10 @@ class Register extends Component {
                     className={'req'}
                     spanContent={'*'}
                     type={'text'}
+                    name={'name'}
                     placeholder={'Barack Obama'}
+                    onChange={this.handleInputChange}
+                    value={name}
                     autoComplete={'off'}
                 />
                 </div>
@@ -63,10 +134,25 @@ class Register extends Component {
                     className={'req'}
                     spanContent={'*'}
                     type={'email'}
+                    name={'email'}
                     placeholder={'example@mail.com'}
+                    onChange={this.handleInputChange}
+                    onFocus={this.onFocus}
+                    onBlur={this.isEmailAvailable}
+                    value={email}
                     autoComplete={'off'}
                 />
                 </div>
+                {emailTaken &&
+                  <div className="field-wrap">
+                    <p className="errorBox">Email is Already Taken</p>
+                  </div> 
+                }
+                {emailAvailable &&
+                  <div className="field-wrap">
+                    <p className="successBox">Email is Available</p>
+                  </div> 
+                } 
                 <div className="field-wrap">
                  <Input
                   id={ 'RegistrationPassword'}
@@ -74,7 +160,10 @@ class Register extends Component {
                   className={'req'}
                   spanContent={'*'}
                   type={'password'}
+                  name={'password'}
                   placeholder={'Password'}
+                  onChange={this.handleInputChange}
+                  value={password}
                   autoComplete={'off'}
                 />
                 </div>    
