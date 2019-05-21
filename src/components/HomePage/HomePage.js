@@ -1,8 +1,15 @@
 import React, { Component, Fragment} from 'react';
+import { withRouter } from 'react-router-dom';
 import  './HomePage.scss';
 
 
-export default class HomePage extends Component {
+class HomePage extends Component {
+  componentDidMount() {
+    const { isLoggedIn, history } = this.props;
+    if(!isLoggedIn){
+      history.push('/');
+    }
+  }
   render() {
     return (
     <Fragment> 
@@ -10,4 +17,5 @@ export default class HomePage extends Component {
     </Fragment>
     )
   }
-}
+};
+export default withRouter(HomePage);

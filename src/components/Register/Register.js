@@ -70,6 +70,7 @@ class Register extends Component {
      usernameAvailable,
      emailTaken,
      emailAvailable } = this.state;
+     console.log(this.props);
     return (
         <div className="registrationForm">
       

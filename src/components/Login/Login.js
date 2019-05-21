@@ -27,11 +27,12 @@ class Login extends Component {
     this.setState({error: false});
   }
   onSubmit = () => {
-    const {history} = this.props;
+    const { history, login } = this.props;
     const { email, password } = this.state
     postData('http://localhost:8080/login', {email,password})
     .then(({data, status})=> {
       if(data==='Authenticated'&&status===200) {
+        login(email);
         history.push('/home');
       } else {
         this.setError();
