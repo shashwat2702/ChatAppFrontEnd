@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
 import Input from '../shared/Input/Input';
 import Button from '../shared/Button/Button';
+import { postData } from '../../utils/getData';
 import './Login.scss';
 
-export default class Login extends Component {
+class Login extends Component {
+  onSubmit = () => {
+    postData('http://localhost:8080/login', {email:'shashwat@gmail.com',password:'Pass@1'})
+    .then(({data, status})=> {
+      console.log(data,status);
+      if(data==='Authenticated') {
+        this.props.history.push('/home');
+      }
+    });
+  }
   render() {
+    console.log(this.props);
     return (
         <div className="loginForm">
-          <ul class="tab-group">
-            <li class="tab"><Link to="/registration">Sign Up</Link></li>
-            <li class="tab active"><Link to="/">Log In</Link></li>
+          <ul className="tab-group">
+            <li className="tab"><Link to="/registration">Sign Up</Link></li>
+            <li className="tab active"><Link to="/">Log In</Link></li>
           </ul>
   
-          <div class="tab-content"> 
+          <div className="tab-content"> 
             <h1>Welcome Back</h1>
-            <form>
-              <div class="field-wrap">
+            <form
+              onSubmit={ (e) => { e.preventDefault(); } }
+            >
+              <div className="field-wrap">
                 <Input
                   id={ 'LoginEmail'}
                   label={'Email ID'}
@@ -27,7 +41,7 @@ export default class Login extends Component {
                   autoComplete={'off'}
                 />
               </div>
-              <div class="field-wrap">
+              <div className="field-wrap">
               <Input
                   id={ 'LoginPassword'}
                   label={'Password'}
@@ -38,7 +52,7 @@ export default class Login extends Component {
                   autoComplete={'off'}
                 />
               </div>   
-              <Button type="submit" label={'Log In'}/>
+              <Button type="submit" label={'Log In'} onClick={this.onSubmit}/>
             </form>
             <div id="login">   
             </div>
@@ -47,3 +61,4 @@ export default class Login extends Component {
     )
   }
 }
+export default withRouter(Login);

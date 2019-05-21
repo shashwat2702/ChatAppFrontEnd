@@ -1,5 +1,5 @@
+import {getData, postData} from './getData';
 const axios = require('axios');
-const getData = require('./getData');
 
 const mockPosts = {
   'J K Rowling': [
@@ -31,6 +31,23 @@ describe('getData () :', () => {
   });
   it('should return an object', async (done) => {
     getData('http://localhost:8080/books').then((data) => {
+      expect(data).toEqual(mockPosts);
+    });
+    done();
+  });
+});
+
+describe('postData () :', () => {
+  let getMock;
+  beforeAll(() => {
+    getMock = jest.spyOn(axios, 'post');
+    getMock.mockImplementation(() => Promise.resolve(mockPosts));
+  });
+  afterAll(() => {
+    getMock.mockRestore();
+  });
+  it('should return an object', async (done) => {
+    postData('http://localhost:8080/books', {key:'dummy'}).then((data) => {
       expect(data).toEqual(mockPosts);
     });
     done();
