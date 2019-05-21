@@ -11,7 +11,7 @@ export default class Register extends Component {
       
           <ul class="tab-group">
             <li class="tab active"><Link to="/registration">Sign Up</Link></li>
-            <li class="tab"><Link to="/login">Log In</Link></li>
+            <li class="tab"><Link to="/">Log In</Link></li>
           </ul>
       
         <div class="tab-content">

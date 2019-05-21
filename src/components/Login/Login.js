@@ -10,7 +10,7 @@ export default class Login extends Component {
         <div className="loginForm">
           <ul class="tab-group">
             <li class="tab"><Link to="/registration">Sign Up</Link></li>
-            <li class="tab active"><Link to="/login">Log In</Link></li>
+            <li class="tab active"><Link to="/">Log In</Link></li>
           </ul>
   
           <div class="tab-content"> 

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component snapshot should render correctly 1`] = `
+<div
+  className="inputComponent"
+>
+  <label
+    htmlFor="inputField"
+  >
+    Name
+    <span
+      className="spanStyle"
+    >
+      *
+    </span>
+  </label>
+  <input
+    autoComplete="off"
+    id="inputField"
+    type="text"
+  />
+</div>
+`;
