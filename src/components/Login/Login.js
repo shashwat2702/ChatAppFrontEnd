@@ -31,8 +31,9 @@ class Login extends Component {
     const { email, password } = this.state
     postData('http://localhost:8080/login', {email,password})
     .then(({data, status})=> {
-      if(data==='Authenticated'&&status===200) {
-        login(email);
+      const { authentication, userName } = data;
+      if(authentication==='Authenticated'&&status===200) {
+        login(userName);
         history.push('/home');
       } else {
         this.setError();

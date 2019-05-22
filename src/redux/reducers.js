@@ -4,13 +4,8 @@ import {
   LOGOUT,
   ADD_MESSAGE
 } from './actions';
-const initialState = {
-    login: false,
-    username: '',
-    conversation: []
-};
 
-const login = (state=initialState, action) => {
+const login = (state={ login: false, username: ''}, action) => {
     switch (action.type) {
         case LOGIN:
             return {
@@ -20,19 +15,19 @@ const login = (state=initialState, action) => {
             }
         case LOGOUT: 
             return {
-                ...initialState
+                login: false,
+                username: ''
             }
         default:
             return state
     }
 };
-const conversation = (state=initialState, action) => {
+const conversation = (state= { messages: [] }, action) => {
     switch(action.type) {
         case ADD_MESSAGE:
             return {
-                ...state,
-                conversation: [
-                    ...state.conversation,
+                messages: [
+                    ...state.messages,
                     {
                         sender: action.payload.sender,
                         message: action.payload.message

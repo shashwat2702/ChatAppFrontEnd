@@ -29,7 +29,7 @@ export const mapStateToProps = state => {
   return {
     isLoggedIn : state.login.login,
     username: state.login.username,
-    messages: state.conversation.conversation
+    messages: state.conversation.messages
   }
 }
 export const mapDispatchToProps = (dispatch) =>

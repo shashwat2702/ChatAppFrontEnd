@@ -12,9 +12,8 @@ class Header extends Component {
     };
   }
   onSubmit = () => {
-    const { logout, history } = this.props;
+    const { logout } = this.props;
     logout();
-    history.push('/');
   }
   render() {
     const { isLoggedIn } = this.props;

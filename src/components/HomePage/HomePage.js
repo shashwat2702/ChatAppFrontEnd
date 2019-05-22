@@ -10,18 +10,36 @@ class HomePage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      message: ''
+      message: '',
+      allActiveUsers: []
     }
     this.socket = io('localhost:8080');
+    this.socket.emit('NEW USER', {
+        username: props.username
+    });
+    this.socket.on('LIST OF ACTIVE USERS', (data) => {
+        this.setState({allActiveUsers: data});
+    });
     this.socket.on('RECEIVE_MESSAGE', function(data){
       props.addMessage(data.author, data.message);
-});
+    });
   }
   componentDidMount() {
     const { isLoggedIn, history } = this.props;
     if(!isLoggedIn){
       history.push('/');
     }
+  }
+  componentDidUpdate(prevProps) {
+    const { isLoggedIn, history } = this.props;
+    if (isLoggedIn !== prevProps.isLoggedIn) {
+      history.push('/');
+    }
+}
+  componentWillUnmount() {
+    this.socket.emit('USER DISCONNECTED', {
+        username: this.props.username
+    });
   }
   handleInputChange = (event) => {
     const target = event.target;
@@ -46,13 +64,21 @@ class HomePage extends Component {
         return(<div> {messageItem.sender} : {messageItem.message}</div>)
     });
   }
+  showAllActiveUsers = () => {
+    const { allActiveUsers } = this.state;
+    return allActiveUsers.map((user) => {
+      return(<div>{user}</div>)
+    })
+  }
   render() {
     const { message } = this.state;
+    console.log(this.props);
     return (
       <Fragment>
         <div className="homePageConatiner">
           <div className="activeUsers">
             List Of Participants
+            {this.showAllActiveUsers()}
           </div>
           <div className="actualMessages"> 
             <div className="receivedMessages">
