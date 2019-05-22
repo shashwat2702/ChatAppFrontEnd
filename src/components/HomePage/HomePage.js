@@ -11,9 +11,10 @@ class HomePage extends Component {
     super(props);
     this.state = {
       message: '',
-      allActiveUsers: []
+      allActiveUsers: [],
+      username: props.username
     }
-    this.socket = io('localhost:8080');
+    this.socket = io('https://chat-app-b.herokuapp.com');
     this.socket.emit('NEW USER', {
         username: props.username
     });
@@ -37,8 +38,9 @@ class HomePage extends Component {
     }
 }
   componentWillUnmount() {
+    const { username } = this.state;
     this.socket.emit('USER DISCONNECTED', {
-        username: this.props.username
+        username: username
     });
   }
   handleInputChange = (event) => {
@@ -72,7 +74,6 @@ class HomePage extends Component {
   }
   render() {
     const { message } = this.state;
-    console.log(this.props);
     return (
       <Fragment>
         <div className="homePageConatiner">

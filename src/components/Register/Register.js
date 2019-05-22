@@ -29,7 +29,7 @@ class Register extends Component {
     const {history} = this.props;
     const { userName, name, email, password } = this.state;
     if(userName!==''&&name!==''&&email!==''&&password!==''){
-      postData('http://localhost:8080/register', { userName, name, email, password })
+      postData('https://chat-app-b.herokuapp.com/register', { userName, name, email, password })
         .then(({data, status})=> {
       if(data===userName) {
         history.push('/home');
@@ -40,7 +40,7 @@ class Register extends Component {
   isUsernameAvailable = () => {
     const { userName } = this.state;
     if(userName!==''){
-      getData('http://localhost:8080/checkUserName?userName='+userName).then(({data})=> {
+      getData('https://chat-app-b.herokuapp.com/checkUserName?userName='+userName).then(({data})=> {
       if(data==='UserName Already Exists'){
         this.setState({usernameTaken: true, usernameAvailable: false});
       } else {
@@ -52,7 +52,7 @@ class Register extends Component {
   isEmailAvailable = () => {
     const { email } = this.state;
     if(email!==''){
-      getData('http://localhost:8080/checkEmail?email='+email).then(({data})=> {
+      getData('https://chat-app-b.herokuapp.com/checkEmail?email='+email).then(({data})=> {
       if(data==='Email Already Exists'){
         this.setState({emailTaken: true, emailAvailable: false});
       } else {

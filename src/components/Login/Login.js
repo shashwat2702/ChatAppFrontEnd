@@ -29,7 +29,7 @@ class Login extends Component {
   onSubmit = () => {
     const { history, login } = this.props;
     const { email, password } = this.state
-    postData('http://localhost:8080/login', {email,password})
+    postData('https://chat-app-b.herokuapp.com/login', {email,password})
     .then(({data, status})=> {
       const { authentication, userName } = data;
       if(authentication==='Authenticated'&&status===200) {
