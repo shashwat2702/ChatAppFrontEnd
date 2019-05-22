@@ -14,7 +14,7 @@ class HomePage extends Component {
     }
     this.socket = io('localhost:8080');
     this.socket.on('RECEIVE_MESSAGE', function(data){
-      console.log(data);
+      props.addMessage(data.author, data.message);
 });
   }
   componentDidMount() {
@@ -40,6 +40,12 @@ class HomePage extends Component {
     });
     this.setState({message: ''});
   };
+  showAllMessages = () => {
+    const { messages} = this.props;
+    return messages.map((messageItem, index) => {
+        return(<div> {messageItem.sender} : {messageItem.message}</div>)
+    });
+  }
   render() {
     const { message } = this.state;
     return (
@@ -50,9 +56,9 @@ class HomePage extends Component {
           </div>
           <div className="actualMessages"> 
             <div className="receivedMessages">
-            Received Msgs go here
+            {this.showAllMessages()}
             </div>
-            <div className="sendMessageContainer">
+            <form className="sendMessageContainer" onSubmit={ (e) => { e.preventDefault(); } }>
               <div className="messageInput">
                 <Input
                   id={'textForSending'}
@@ -67,7 +73,7 @@ class HomePage extends Component {
               <div className="sendButton">
                 <Button className={'sendButton button'} type="submit" label={'Send'} onClick={this.sendMessage}/>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </Fragment>
