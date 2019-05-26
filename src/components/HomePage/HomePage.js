@@ -16,7 +16,7 @@ class HomePage extends Component {
       allActiveUsers: [],
       username: props.username,
     };
-    this.socket = io('localhost:8080');
+    this.socket = io('https://chat-app-b.herokuapp.com/');
     const { username } = this.state;
     this.socket.emit('NEW USER', {
       username,
