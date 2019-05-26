@@ -4,6 +4,6 @@ const getData = url => axios.get(url);
 const postData = (url, data) => axios({
   method: 'post',
   url,
-  data
+  data,
 });
-export { getData, postData};
+export { getData, postData };

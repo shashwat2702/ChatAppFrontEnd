@@ -1,4 +1,5 @@
-import {getData, postData} from './getData';
+import { getData, postData } from './getData';
+
 const axios = require('axios');
 
 const mockPosts = {
@@ -47,7 +48,7 @@ describe('postData () :', () => {
     getMock.mockRestore();
   });
   it('should return an object', async (done) => {
-    postData('http://localhost:8080/books', {key:'dummy'}).then((data) => {
+    postData('http://localhost:8080/books', { key: 'dummy' }).then((data) => {
       expect(data).toEqual(mockPosts);
     });
     done();

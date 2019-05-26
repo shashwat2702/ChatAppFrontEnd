@@ -10,14 +10,15 @@ import store from './redux/store';
 const reduxStore = store();
 
 ReactDOM.render(
-        <div>
-            <Provider store={reduxStore}>
-                <HashRouter>
-                    <Router />
-                </HashRouter>
-            </Provider>
-        </div>
-    , document.getElementById('root'));
+  <div>
+    <Provider store={reduxStore}>
+      <HashRouter>
+        <Router />
+      </HashRouter>
+    </Provider>
+  </div>,
+  document.getElementById('root'),
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

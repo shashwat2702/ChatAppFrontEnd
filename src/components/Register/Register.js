@@ -7,178 +7,195 @@ import './Register.scss';
 
 class Register extends Component {
   state = {
-      userName: '',
-      name: '',
-      email: '',
-      password: '',
-      usernameTaken: false,
-      usernameAvailable: false,
-      emailTaken: false,
-      emailAvailable: false
-    };
+    userName: '',
+    name: '',
+    email: '',
+    password: '',
+    usernameTaken: false,
+    usernameAvailable: false,
+    emailTaken: false,
+    emailAvailable: false,
+  };
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const { target } = event;
+    const { value } = target;
+    const { name } = target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
+
   onSubmit = () => {
-    const {history} = this.props;
-    const { userName, name, email, password } = this.state;
-    if(userName!==''&&name!==''&&email!==''&&password!==''){
-      postData('https://chat-app-b.herokuapp.com/register', { userName, name, email, password })
-        .then(({data, status})=> {
-      if(data===userName) {
-        history.push('/home');
-      }
-    });
+    const { history } = this.props;
+    const {
+      userName, name, email, password,
+    } = this.state;
+    if (userName !== '' && name !== '' && email !== '' && password !== '') {
+      postData('https://chat-app-b.herokuapp.com/register', {
+        userName, name, email, password,
+      })
+        .then(({ data, status }) => {
+          if (data === userName) {
+            history.push('/home');
+          }
+        });
     }
   };
+
   isUsernameAvailable = () => {
     const { userName } = this.state;
-    if(userName!==''){
-      getData('https://chat-app-b.herokuapp.com/checkUserName?userName='+userName).then(({data})=> {
-      if(data==='UserName Already Exists'){
-        this.setState({usernameTaken: true, usernameAvailable: false});
-      } else {
-        this.setState({usernameTaken: false, usernameAvailable: true});
-      }
-    });
+    if (userName !== '') {
+      getData(`https://chat-app-b.herokuapp.com/checkUserName?userName=${userName}`).then(({ data }) => {
+        if (data === 'UserName Already Exists') {
+          this.setState({ usernameTaken: true, usernameAvailable: false });
+        } else {
+          this.setState({ usernameTaken: false, usernameAvailable: true });
+        }
+      });
     }
   }
+
   isEmailAvailable = () => {
     const { email } = this.state;
-    if(email!==''){
-      getData('https://chat-app-b.herokuapp.com/checkEmail?email='+email).then(({data})=> {
-      if(data==='Email Already Exists'){
-        this.setState({emailTaken: true, emailAvailable: false});
-      } else {
-        this.setState({emailTaken: false, emailAvailable: true});
-      }
-    });
+    if (email !== '') {
+      getData(`https://chat-app-b.herokuapp.com/checkEmail?email=${email}`).then(({ data }) => {
+        if (data === 'Email Already Exists') {
+          this.setState({ emailTaken: true, emailAvailable: false });
+        } else {
+          this.setState({ emailTaken: false, emailAvailable: true });
+        }
+      });
     }
   }
+
   render() {
-    const { userName,
-     name,
-     email,
-     password,
-     usernameTaken,
-     usernameAvailable,
-     emailTaken,
-     emailAvailable } = this.state;
-     console.log(this.props);
+    const {
+      userName,
+      name,
+      email,
+      password,
+      usernameTaken,
+      usernameAvailable,
+      emailTaken,
+      emailAvailable,
+    } = this.state;
+    console.log(this.props);
     return (
-        <div className="registrationForm">
-      
-          <ul className="tab-group">
-            <li className="tab active"><Link to="/registration">Sign Up</Link></li>
-            <li className="tab"><Link to="/">Log In</Link></li>
-          </ul>
-      
+      <div className="registrationForm">
+
+        <ul className="tab-group">
+          <li className="tab active"><Link to="/registration">Sign Up</Link></li>
+          <li className="tab"><Link to="/">Log In</Link></li>
+        </ul>
+
         <div className="tab-content">
-          <div id="signup">   
+          <div id="signup">
             <h1>Sign Up for Free</h1>
-          
+
             <form
-              onSubmit={ (e) => { e.preventDefault(); } }
+              onSubmit={(e) => { e.preventDefault(); }}
             >
-          
-                <div className="field-wrap">
+
+              <div className="field-wrap">
                 <Input
-                    id={ 'RegistrationUserName'}
-                    label={'Username'}
-                    className={'req'}
-                    spanContent={'*'}
-                    type={'text'}
-                    name={'userName'}
-                    placeholder={'Barack@president'}
-                    onChange={this.handleInputChange}
-                    onFocus={this.onFocus}
-                    onBlur={this.isUsernameAvailable}
-                    value={userName}
-                    autoComplete={'off'}
+                  id="RegistrationUserName"
+                  label="Username"
+                  className="req"
+                  spanContent="*"
+                  type="text"
+                  name="userName"
+                  placeholder="Barack@president"
+                  onChange={this.handleInputChange}
+                  onFocus={this.onFocus}
+                  onBlur={this.isUsernameAvailable}
+                  value={userName}
+                  autoComplete="off"
                 />
-                </div>
-                {usernameTaken &&
+              </div>
+              {usernameTaken
+                  && (
                   <div className="field-wrap">
                     <p className="errorBox">User Name is Already Taken</p>
-                  </div> 
+                  </div>
+                  )
                 }
-                {usernameAvailable &&
+              {usernameAvailable
+                  && (
                   <div className="field-wrap">
                     <p className="successBox">User Name is Available</p>
-                  </div> 
-                } 
-        
-                <div className="field-wrap">
-                  <Input
-                    id={ 'RegistrationName'}
-                    label={'Name'}
-                    className={'req'}
-                    spanContent={'*'}
-                    type={'text'}
-                    name={'name'}
-                    placeholder={'Barack Obama'}
-                    onChange={this.handleInputChange}
-                    value={name}
-                    autoComplete={'off'}
+                  </div>
+                  )
+                }
+
+              <div className="field-wrap">
+                <Input
+                  id="RegistrationName"
+                  label="Name"
+                  className="req"
+                  spanContent="*"
+                  type="text"
+                  name="name"
+                  placeholder="Barack Obama"
+                  onChange={this.handleInputChange}
+                  value={name}
+                  autoComplete="off"
                 />
-                </div>
-                <div className="field-wrap">
-                  <Input
-                    id={ 'RegistrationEmail'}
-                    label={'Email ID'}
-                    className={'req'}
-                    spanContent={'*'}
-                    type={'email'}
-                    name={'email'}
-                    placeholder={'example@mail.com'}
-                    onChange={this.handleInputChange}
-                    onFocus={this.onFocus}
-                    onBlur={this.isEmailAvailable}
-                    value={email}
-                    autoComplete={'off'}
+              </div>
+              <div className="field-wrap">
+                <Input
+                  id="RegistrationEmail"
+                  label="Email ID"
+                  className="req"
+                  spanContent="*"
+                  type="email"
+                  name="email"
+                  placeholder="example@mail.com"
+                  onChange={this.handleInputChange}
+                  onFocus={this.onFocus}
+                  onBlur={this.isEmailAvailable}
+                  value={email}
+                  autoComplete="off"
                 />
-                </div>
-                {emailTaken &&
+              </div>
+              {emailTaken
+                  && (
                   <div className="field-wrap">
                     <p className="errorBox">Email is Already Taken</p>
-                  </div> 
+                  </div>
+                  )
                 }
-                {emailAvailable &&
+              {emailAvailable
+                  && (
                   <div className="field-wrap">
                     <p className="successBox">Email is Available</p>
-                  </div> 
-                } 
-                <div className="field-wrap">
-                 <Input
-                  id={ 'RegistrationPassword'}
-                  label={'Password'}
-                  className={'req'}
-                  spanContent={'*'}
-                  type={'password'}
-                  name={'password'}
-                  placeholder={'Password'}
+                  </div>
+                  )
+                }
+              <div className="field-wrap">
+                <Input
+                  id="RegistrationPassword"
+                  label="Password"
+                  className="req"
+                  spanContent="*"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
                   onChange={this.handleInputChange}
                   value={password}
-                  autoComplete={'off'}
+                  autoComplete="off"
                 />
-                </div>    
-              <Button type="submit" label={'Get Started'} onClick={this.onSubmit}/>
-          
+              </div>
+              <Button type="submit" label="Get Started" onClick={this.onSubmit} />
+
             </form>
 
           </div>
-        
-          <div id="login">   
-          </div>
+
+          <div id="login" />
         </div>
       </div>
-    )
+    );
   }
 }
 export default withRouter(Register);
